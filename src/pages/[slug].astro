@@ -1,0 +1,25 @@
+---
+import getHooks from "../lib/hooks";
+export async function getStaticPaths() {
+    const hooks = await getHooks();
+
+    return hooks.hooks.map((hook) => ({
+        params: {slug: hook.name},
+        props: {
+            title: hook.name,
+            type: hook.type,
+        },
+    }));
+}
+
+const { title, type } = Astro.props;
+---
+<html lang="en">
+<head>
+    <title>{title}</title>
+</head>
+<body>
+<h1>{title}</h1>
+<p>{type}</p>
+</body>
+</html>
