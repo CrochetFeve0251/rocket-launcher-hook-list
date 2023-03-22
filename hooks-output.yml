@@ -1,0 +1,1696 @@
+---
+hooks:
+- type: action
+  name: rt_nginx_helper_purge_all
+- type: action
+  name: after_purge_url
+- type: filter
+  name: rocket_clean_home_feeds
+  since: "2.7"
+  params:
+    urls:
+      type: array
+      name: urls
+      description: The urls of the home feeds.
+  summery: Filter the home feeds urls
+  description: Filter the home feeds urls
+- type: filter
+  name: rocket_webp_is_using_cdn
+  since: "3.4"
+  params:
+    use:
+      type: bool
+      name: use
+      description: True if WP Rocket is using a CDN for webp images. False otherwise.
+  summery: Filter whether WP Rocket is using a CDN for webp images.
+  description: Filter whether WP Rocket is using a CDN for webp images.
+- type: filter
+  name: rocket_page_has_webp_files
+  since: "3.4"
+  params:
+    has_webp:
+      type: bool
+      name: has_webp
+      description: True if the page contains webp files. False otherwise.
+    html:
+      type: string
+      name: html
+      description: "The page\u2019s html contents."
+  summery: Tell if the page contains webp files.
+  description: Tell if the page contains webp files.
+- type: filter
+  name: rocket_file_extensions_for_webp
+  since: "3.4"
+  params:
+    extensions:
+      type: array
+      name: extensions
+      description: An array of file extensions.
+  summery: Filter the list of file extensions that may have a webp version.
+  description: Filter the list of file extensions that may have a webp version.
+- type: filter
+  name: rocket_attributes_for_webp
+  since: "3.4"
+  params:
+    attributes:
+      type: array
+      name: attributes
+      description: An array of HTML attribute names.
+  summery: Filter the names of the HTML attributes where WP Rocket must search for
+    image files.
+  description: |-
+    Filter the names of the HTML attributes where WP Rocket must search for image files.
+    Don't prepend new names with `data-`, WPR will do it. For example if you want to add `data-foo-bar`, you only need to add `foo-bar` or `bar` to the list.
+- type: filter
+  name: rocket_url_to_path
+  since: "3.3"
+  author:
+    0: Remy Perona
+    name: Remy Perona
+    1: Remy Perona
+  params:
+    file:
+      type: string
+      name: file
+      description: Absolute path to the file.
+    url:
+      type: string
+      name: url
+      description: URL of the asset.
+  summery: Filters the absolute path to the asset file
+  description: Filters the absolute path to the asset file
+- type: filter
+  name: rocket_url_to_path_associations
+  since: "3.4"
+  params:
+    list:
+      type: array
+      name: list
+      description: The list of URL/path associations. URLs are schema-less, starting
+        by a double slash.
+  summery: Filter the list of URL/path associations.
+  description: |-
+    Filter the list of URL/path associations.
+    The URLs with the most levels must come first.
+- type: filter
+  name: rocket_skip_post_row_actions
+  since: 3.11.4
+  params:
+    cpts:
+      type: array
+      name: cpts
+      description: Post Types.
+  summery: Filters the post type on row actions.
+  description: Filters the post type on row actions.
+- type: action
+  name: rocket_options_changed
+  since: "3.11"
+  params:
+    value:
+      type: array
+      name: value
+      description: An array of submitted values for the settings.
+  summery: Fires after WP Rocket options that require a cache purge have changed
+  description: Fires after WP Rocket options that require a cache purge have changed
+- type: action
+  name: rocket_after_options_metabox
+  since: "3.6"
+  summery: "Fires after WP Rocket\u2019s metabox."
+  description: "Fires after WP Rocket\u2019s metabox."
+- type: filter
+  name: rocket_submitbox_options_post_types
+  since: 3.12.1
+  params:
+    cpts:
+      type: array
+      name: cpts
+      description: Post Types.
+  summery: Filters the post type on submitbox.
+  description: Filters the post type on submitbox.
+- type: filter
+  name: rocket_metabox_options_post_types
+- type: filter
+  name: rocket_bad_deactivations
+  since: 2.0.0
+  params:
+    errors:
+      type: array
+      name: errors
+      description: Contains the error messages to be filtered
+    msg:
+      type: string
+      name: msg
+      description: Contains the error type (wpconfig or htaccess)
+  summery: Filter the output messages for each bad deactivation attempt.
+  description: Filter the output messages for each bad deactivation attempt.
+- type: filter
+  name: rocket_plugins_to_deactivate
+  since: 2.6.4
+  params:
+    plugins:
+      type: array
+      name: plugins
+      description: List of recommended plugins to deactivate.
+  summery: Filter the recommended plugins to deactivate to prevent conflicts
+  description: Filter the recommended plugins to deactivate to prevent conflicts
+- type: filter
+  name: rocket_plugins_to_deactivate_explanations
+  since: 3.10.5
+  params:
+    plugins:
+      type: array
+      name: plugins
+      description: List of recommended plugins to deactivate explanations.
+  summery: Filter the recommended plugins to deactivate explanations
+  description: Filter the recommended plugins to deactivate explanations
+- type: action
+  name: wp_rocket_first_install
+- type: action
+  name: rocket_preload_unlock_all_urls
+- type: filter
+  name: rocket_webp_ewww_use_rewrite_rules
+  since: "3.4"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    use_rewrite_rules:
+      type: bool
+      name: use_rewrite_rules
+      description: True when EWWW uses rewrite rules. False otherwise.
+  summery: Filter wether EWW is using rewrite rules for webp.
+  description: Filter wether EWW is using rewrite rules for webp.
+- type: action
+  name: rocket_third_party_webp_change
+  since: "3.4"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  summery: Trigger an action when the webp feature is enabled/disabled in a third
+    party plugin.
+  description: Trigger an action when the webp feature is enabled/disabled in a third
+    party plugin.
+- type: action
+  name: rocket_admin_bar_items
+  since: "3.6"
+  params:
+    wp_admin_bar:
+      type: WP_Admin_Bar
+      name: wp_admin_bar
+      description: WP_Admin_Bar instance, passed by reference.
+  summery: Fires when adding WP Rocket admin bar items
+  description: Fires when adding WP Rocket admin bar items
+- type: action
+  name: before_rocket_clean_post
+  since: 1.3.0
+  params:
+    post:
+      type: WP_Post
+      name: post
+      description: The post object
+    purge_urls:
+      type: array
+      name: purge_urls
+      description: URLs cache files to remove
+    lang:
+      type: string
+      name: lang
+      description: The post language
+  summery: Fires before cache files related with the post are deleted
+  description: Fires before cache files related with the post are deleted
+- type: action
+  name: after_rocket_clean_post
+  since: 1.3.0
+  params:
+    post:
+      type: WP_Post
+      name: post
+      description: The post object
+    purge_urls:
+      type: array
+      name: purge_urls
+      description: URLs cache files to remove
+    lang:
+      type: string
+      name: lang
+      description: The post language
+  summery: Fires after cache files related with the post are deleted
+  description: Fires after cache files related with the post are deleted
+- type: action
+  name: rocket_after_preload_after_purge_cache
+  since: "3.5"
+  params:
+    home_url:
+      type: string
+      name: home_url
+      description: URL to the homepage being preloaded.
+    lang:
+      type: string
+      name: lang
+      description: The lang of the homepage.
+    args:
+      type: array
+      name: args
+      description: Arguments used for the preload request.
+  summery: Fires after automatically preloading the homepage, which occurs after purging
+    the cache.
+  description: Fires after automatically preloading the homepage, which occurs after
+    purging the cache.
+- type: action
+  name: rocket_purge_cache
+  since: "3.6"
+  params:
+    type:
+      type: string
+      name: type
+      description: 'Type of cache clearance: ''all'', ''post'', ''term'', ''user'',
+        ''url''.'
+    id:
+      type: int
+      name: id
+      description: The post ID, term ID, or user ID being cleared. 0 when $type is
+        not 'post', 'term', or 'user'.
+    taxonomy:
+      type: string
+      name: taxonomy
+      description: The taxonomy the term being cleared belong to. '' when $type is
+        not 'term'.
+    url:
+      type: string
+      name: url
+      description: The URL being cleared. '' when $type is not 'url'.
+  summery: Fires after the cache is cleared.
+  description: Fires after the cache is cleared.
+- type: filter
+  name: rocket_post_purge_urls
+  since: "1.0"
+  params:
+    purge_urls:
+      type: array
+      name: purge_urls
+      description: List of URLs cache files to remove
+  summery: Filter URLs cache files to remove
+  description: Filter URLs cache files to remove
+- type: action
+  name: rocket_before_reset_opcache
+  since: 3.2.5
+  author:
+    0: Remy Perona
+    name: Remy Perona
+    1: Remy Perona
+  summery: Triggers before WP Rocket tries to reset OPCache
+  description: Triggers before WP Rocket tries to reset OPCache
+- type: action
+  name: rocket_after_reset_opcache
+  since: 3.2.5
+  author:
+    0: Remy Perona
+    name: Remy Perona
+    1: Remy Perona
+  summery: Triggers after WP Rocket tries to reset OPCache
+  description: Triggers after WP Rocket tries to reset OPCache
+- type: action
+  name: rocket_before_rollback
+  summery: Fires before doing the rollback
+  description: Fires before doing the rollback
+- type: filter
+  name: rocket_lazyload_iframe_html
+  since: "2.11"
+  params:
+    html:
+      type: array
+      name: html
+      description: Output that will be printed.
+  summery: Filter the LazyLoad HTML output on iframes
+  description: Filter the LazyLoad HTML output on iframes
+- type: filter
+  name: rocket_cdn_css_properties_url
+  since: "2.8"
+  params:
+    url:
+      type: string
+      name: url
+      description: URL of the CSS property
+  summery: Filters the URL of the CSS property
+  description: Filters the URL of the CSS property
+- type: filter
+  name: rocket_cdn_custom_filetypes
+  since: "2.9"
+  author:
+    0: Remy Perona
+    name: Remy Perona
+    1: Remy Perona
+  params:
+    filetypes:
+      type: array
+      name: filetypes
+      description: Array of file types.
+  summery: Filters the filetypes allowed for the CDN
+  description: Filters the filetypes allowed for the CDN
+- type: filter
+  name: rocket_cdn_reject_files
+  since: "2.5"
+  params:
+    files:
+      type: array
+      name: files
+      description: List of rejected files.
+  summery: Filter the rejected files.
+  description: Filter the rejected files.
+- type: action
+  name: rocket_deactivation
+  since: 3.1.5
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  summery: WP Rocket deactivation.
+  description: WP Rocket deactivation.
+- type: action
+  name: rocket_activation
+  since: 3.1.5
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  summery: WP Rocket activation.
+  description: WP Rocket activation.
+- type: filter
+  name: rocket_advanced_cache_file
+  since: "2.1"
+  params:
+    buffer:
+      type: string
+      name: buffer
+      description: The content that will be printed in advanced-cache.php.
+  summery: Filter the content of advanced-cache.php file.
+  description: Filter the content of advanced-cache.php file.
+- type: filter
+  name: rocket_css_url
+  since: "2.1"
+  params:
+    minify_url:
+      type: string
+      name: minify_url
+      description: Minified file URL.
+  summery: Filters CSS file URL with CDN hostname
+  description: Filters CSS file URL with CDN hostname
+- type: filter
+  name: rocket_js_url
+  since: "2.1"
+  params:
+    minify_url:
+      type: string
+      name: minify_url
+      description: Minified file URL.
+  summery: Filters JavaScript file URL with CDN hostname
+  description: Filters JavaScript file URL with CDN hostname
+- type: filter
+  name: rocket_post_dates_urls
+  since: 1.1.0
+  params:
+    urls:
+      type: array
+      name: urls
+      description: List of dates URLs.
+  summery: Filter the list of dates URLs.
+  description: Filter the list of dates URLs.
+- type: filter
+  name: set_rocket_wp_cache_define
+  since: "2.1"
+  params:
+    turn_it_on:
+      type: string
+      name: turn_it_on
+      description: The value of WP_CACHE constant.
+  summery: Filter allow to change the value of WP_CACHE constant
+  description: Filter allow to change the value of WP_CACHE constant
+- type: filter
+  name: rocket_post_terms_urls
+  since: 1.1.0
+  params:
+    urls:
+      type: array
+      name: urls
+      description: List of taxonomies URLs
+  summery: Filter the list of taxonomies URLs
+  description: Filter the list of taxonomies URLs
+- type: filter
+  name: rocket_htaccess_compressed_assets
+- type: filter
+  name: rocket_exclude_defer_js
+  since: "2.10"
+  author:
+    0: Remy Perona
+    name: Remy Perona
+    1: Remy Perona
+  params:
+    exclude_defer_js:
+      type: array
+      name: exclude_defer_js
+      description: An array of URLs for the JS files to be excluded.
+  summery: Filter list of Deferred JavaScript files
+  description: Filter list of Deferred JavaScript files
+- type: action
+  name: rocket_after_facebook_pixel_url_replaced
+  since: "3.2"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    busting_file_url:
+      type: string
+      name: busting_file_url
+      description: URL of the local main file.
+    all_files:
+      type: array
+      name: all_files
+      description: An array of all file paths.
+  summery: Triggered once the Facebook pixel URL has been replaced in the page contents.
+  description: Triggered once the Facebook pixel URL has been replaced in the page
+    contents.
+- type: action
+  name: rocket_after_facebook_pixel_file_updated
+  since: "3.2"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    file_path:
+      type: string
+      name: file_path
+      description: Path to the file to update.
+    file_contents:
+      type: string
+      name: file_contents
+      description: The file contents.
+  summery: Triggered once a file contents have been updated.
+  description: Triggered once a file contents have been updated.
+- type: action
+  name: rocket_after_facebook_pixel_files_deleted
+  since: "3.2"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    files:
+      type: array
+      name: files
+      description: An array of file names.
+    error_paths:
+      type: array
+      name: error_paths
+      description: Paths to the files that couldn't be deleted. An empty array if
+        everything is fine.
+  summery: Triggered once all local files have been deleted (or not).
+  description: Triggered once all local files have been deleted (or not).
+- type: action
+  name: rocket_after_facebook_sdk_url_replaced
+  since: "3.2"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    file_url:
+      type: string
+      name: file_url
+      description: URL of the local main file.
+    file_path:
+      type: string
+      name: file_path
+      description: Path to the local file.
+  summery: Triggered once the Facebook SDK URL has been replaced in the page contents.
+  description: Triggered once the Facebook SDK URL has been replaced in the page contents.
+- type: action
+  name: rocket_after_facebook_sdk_file_updated
+  since: "3.2"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    file_path:
+      type: string
+      name: file_path
+      description: Path to the file to update.
+    file_contents:
+      type: string
+      name: file_contents
+      description: The file contents.
+  summery: Triggered once a file contents have been updated.
+  description: Triggered once a file contents have been updated.
+- type: action
+  name: rocket_after_facebook_sdk_files_refresh
+  since: "3.2"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    files:
+      type: array
+      name: files
+      description: An array of file names.
+    error_paths:
+      type: array
+      name: error_paths
+      description: Paths to the files that couldn't be updated. An empty array if
+        everything is fine.
+  summery: Triggered once all local files have been updated (or not).
+  description: Triggered once all local files have been updated (or not).
+- type: action
+  name: rocket_after_facebook_sdk_files_deleted
+  since: "3.2"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    files:
+      type: array
+      name: files
+      description: An array of file names.
+    error_paths:
+      type: array
+      name: error_paths
+      description: Paths to the files that couldn't be deleted. An empty array if
+        everything is fine.
+  summery: Triggered once all local files have been deleted (or not).
+  description: Triggered once all local files have been deleted (or not).
+- type: filter
+  name: rocket_inputs_sanitize
+- type: filter
+  name: rocket_minify_html_options
+  since: 1.1.12
+  params:
+    html_options:
+      type: array
+      name: html_options
+      description: Options of minify inline HTML.
+  summery: Filter options of minify inline HTML
+  description: Filter options of minify inline HTML
+- type: filter
+  name: rocket_exclude_css
+  since: "2.6"
+  params:
+    excluded_files:
+      type: array
+      name: excluded_files
+      description: List of excluded CSS files.
+  summery: Filters CSS files to exclude from minification/concatenation.
+  description: Filters CSS files to exclude from minification/concatenation.
+- type: filter
+  name: rocket_exclude_js
+  since: "2.6"
+  params:
+    js_files:
+      type: array
+      name: js_files
+      description: List of excluded JS files.
+  summery: Filter JS files to exclude from minification/concatenation.
+  description: Filter JS files to exclude from minification/concatenation.
+- type: filter
+  name: rocket_cache_busting_filename
+  since: "2.9"
+  author:
+    0: Remy Perona
+    name: Remy Perona
+    1: Remy Perona
+  params:
+    filename:
+      type: string
+      name: filename
+      description: filename for the cache busting file
+  summery: Filters the cache busting filename
+  description: Filters the cache busting filename
+- type: filter
+  name: rocket_maybe_disable_lazyload_helper
+  since: 3.4.2
+  params:
+    disable_images_lazyload:
+      type: array
+      name: disable_images_lazyload
+      description: Will return the array with all plugin names which should disable
+        LazyLoad
+  summery: Lazyload Helper filter which disables WPR lazyload functionality for images.
+  description: Lazyload Helper filter which disables WPR lazyload functionality for
+    images.
+- type: filter
+  name: rocket_maybe_disable_iframes_lazyload_helper
+  since: 3.5.5
+  params:
+    disable_iframes_lazyload:
+      type: array
+      name: disable_iframes_lazyload
+      description: Will return the array with all plugin names which should disable
+        LazyLoad
+  summery: Lazyload Helper filter which disables WPR lazyload functionality for iframes.
+  description: Lazyload Helper filter which disables WPR lazyload functionality for
+    iframes.
+- type: filter
+  name: rocket_maybe_disable_youtube_lazyload_helper
+  since: 3.6.3
+  params:
+    disable_youtube_lazyload:
+      type: array
+      name: disable_youtube_lazyload
+      description: Will return the array with all plugin/themes names which should
+        disable replace YouTube iframe with preview image
+  summery: Lazyload Helper filter which disables WPR lazyload functionality to replace
+    YouTube iframe with preview image.
+  description: Lazyload Helper filter which disables WPR lazyload functionality to
+    replace YouTube iframe with preview image.
+- type: filter
+  name: rocket_before_add_field_to_settings
+  since: "3.10"
+  params:
+    input:
+      type: array
+      name: input
+      description: Array of sanitized values after being submitted by the form.
+  summery: Filters the field  before add to the settings
+  description: Filters the field  before add to the settings
+- type: filter
+  name: rocket_input_sanitize
+  params:
+    input:
+      type: array
+      name: input
+      description: Array of sanitized values after being submitted by the form.
+    settings:
+      type: Settings
+      name: settings
+      description: Current class instance.
+  summery: Filters the sanitized input before returning the array
+  description: Filters the sanitized input before returning the array
+- type: filter
+  name: rocket_before_render_option_extra_field
+- type: action
+  name: rocket_after_clean_terms
+- type: action
+  name: rocket_before_automatic_cache_purge_dir
+  since: "3.4"
+  params:
+    url:
+      type: string
+      name: url
+      description: The home url.
+    file_age_limit:
+      type: int
+      name: file_age_limit
+      description: Timestamp of the maximum age files must have.
+  summery: Fires before purging a cache directory.
+  description: Fires before purging a cache directory.
+- type: action
+  name: rocket_after_automatic_cache_purge_dir
+  since: "3.4"
+  params:
+    deleted:
+      type: array
+      name: deleted
+      description: '{'
+    args:
+      type: array
+      name: args
+      description: '{'
+  summery: Fires after a cache directory is purged.
+  description: |-
+    Fires after a cache directory is purged.
+    An array of arrays sharing the same home URL, described like: {
+    }
+    Ex:
+    [
+    [
+    'home_url'  => 'http://example.com/home1',
+    'home_path' => '/path-to/home1/wp-content/cache/wp-rocket/example.com/home1',
+    'logged_in' => false,
+    'files'     => [
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com/home1/deleted-page',
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com/home1/very-dead-page',
+    ],
+    ],
+    [
+    'home_url'  => 'http://example.com/home1',
+    'home_path' => '/path-to/home1/wp-content/cache/wp-rocket/example.com-Greg-594d03f6ae698691165999/home1',
+    'logged_in' => true,
+    'files'     => [
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com-Greg-594d03f6ae698691165999/home1/how-to-prank-your-coworkers',
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com-Greg-594d03f6ae698691165999/home1/best-source-of-gifs',
+    ],
+    ],
+    ]
+    }
+- type: action
+  name: rocket_after_automatic_cache_purge
+  since: "3.4"
+  params:
+    deleted:
+      type: array
+      name: deleted
+      description: '{'
+    args:
+      type: array
+      name: args
+      description: '{'
+  summery: Fires after cache directories are purged.
+  description: |-
+    Fires after cache directories are purged.
+    An array of arrays, described like: {
+    }
+    Ex:
+    [
+    [
+    'home_url'  => 'http://example.com/home1',
+    'home_path' => '/path-to/home1/wp-content/cache/wp-rocket/example.com/home1',
+    'logged_in' => false,
+    'files'     => [
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com/home1/deleted-page',
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com/home1/very-dead-page',
+    ],
+    ],
+    [
+    'home_url'  => 'http://example.com/home1',
+    'home_path' => '/path-to/home1/wp-content/cache/wp-rocket/example.com-Greg-594d03f6ae698691165999/home1',
+    'logged_in' => true,
+    'files'     => [
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com-Greg-594d03f6ae698691165999/home1/how-to-prank-your-coworkers',
+    '/path-to/home1/wp-content/cache/wp-rocket/example.com-Greg-594d03f6ae698691165999/home1/best-source-of-gifs',
+    ],
+    ],
+    [
+    'home_url'  => 'http://example.com/home4',
+    'home_path' => '/path-to/home4/wp-content/cache/wp-rocket/example.com-Greg-71edg8d6af865569979569/home4',
+    'logged_in' => true,
+    'files'     => [
+    '/path-to/home4/wp-content/cache/wp-rocket/example.com-Greg-71edg8d6af865569979569/home4/easter-eggs-in-code-your-best-opportunities',
+    ],
+    ],
+    ]
+    }
+    }
+- type: filter
+  name: rocket_automatic_cache_purge_urls
+  since: "3.4"
+  params:
+    urls:
+      type: array
+      name: urls
+      description: URLs that will be searched for old cache files.
+    file_age_limit:
+      type: int
+      name: file_age_limit
+      description: Timestamp of the maximum age files must have.
+  summery: Filter home URLs that will be searched for old cache files.
+  description: Filter home URLs that will be searched for old cache files.
+- type: filter
+  name: rocket_cdn_cnames
+  since: "3.4"
+  params:
+    hosts:
+      type: array
+      name: hosts
+      description: List of CDN URLs.
+    zones:
+      type: array
+      name: zones
+      description: List of zones. Default is [ 'all' ].
+  summery: Filter all CDN URLs.
+  description: Filter all CDN URLs.
+- type: filter
+  name: rocket_pre_get_subscription_data
+- type: action
+  name: action_scheduler_before_process_queue
+- type: action
+  name: action_scheduler_after_process_queue
+- type: action
+  name: rocket_critical_css_generation_process_complete
+  since: "2.11"
+  summery: Fires when the critical CSS generation process is complete.
+  description: Fires when the critical CSS generation process is complete.
+- type: filter
+  name: rocket_cpcss_job_request
+  since: "2.11"
+  params:
+    params:
+      type: array
+      name: params
+      description: An array of parameters to send to the API.
+  summery: Filters the parameters sent to the Critical CSS generator API.
+  description: Filters the parameters sent to the Critical CSS generator API.
+- type: filter
+  name: rocket_prevent_deactivation
+  since: 3.6.3
+  params:
+    causes:
+      type: array
+      name: causes
+      description: An array of causes to pass to the notice.
+  summery: Filters the causes which can prevent the deactivation of the plugin
+  description: Filters the causes which can prevent the deactivation of the plugin
+- type: filter
+  name: rocket_heartbeat_context
+  since: "3.2"
+  params:
+    context:
+      name: context
+      description: string Either 'site' (frontend), 'admin' (backend), or 'editor'.
+  summery: Filter the current context.
+  description: |-
+    Filter the current context.
+    This can be useful for ajax requests or requests to admin-post.php, as there is no easy way to tell where those requests come from.
+- type: filter
+  name: rocket_lazyload_script_args
+  since: "3.3"
+  params:
+    inline_args:
+      type: array
+      name: inline_args
+      description: Arguments used for the lazyload script options.
+  summery: Filters the arguments array for the lazyload script options
+  description: Filters the arguments array for the lazyload script options
+- type: filter
+  name: rocket_lazyload_youtube_thumbnail_resolution
+  since: 1.4.8
+  params:
+    thumbnail_resolution:
+      type: string
+      name: thumbnail_resolution
+      description: 'The resolution of the thumbnail. Accepted values: default, mqdefault,
+        hqdefault, sddefault, maxresdefault'
+  summery: Filters the resolution of the YouTube thumbnail
+  description: Filters the resolution of the YouTube thumbnail
+- type: action
+  name: rocket_before_maybe_process_buffer
+  since: 3.4.2
+  author:
+    0: Soponar Cristina
+    name: Soponar Cristina
+    1: Soponar Cristina
+  params:
+    buffer:
+      type: string
+      name: buffer
+      description: HTML content.
+  summery: Triggered before WP Rocket starts the optimization process.
+  description: Triggered before WP Rocket starts the optimization process.
+- type: action
+  name: rocket_after_process_buffer
+  since: "3.12"
+  summery: Fires after processing the buffer
+  description: Fires after processing the buffer
+- type: filter
+  name: rocket_buffer
+  params:
+    buffer:
+      type: string
+      name: buffer
+      description: The page content.
+  summery: 'This hook is used for:'
+  description: |-
+    This hook is used for:
+    - Async CSS files
+    - Defer JavaScript files
+    - Minify/Combine HTML/CSS/JavaScript
+    - CDN
+    - LazyLoad
+- type: filter
+  name: rocket_css_asset_source_path
+  since: 3.3.1
+  params:
+    source:
+      type: string
+      name: source
+      description: Source filepath.
+  summery: Filters the source path for an asset inside a CSS file
+  description: Filters the source path for an asset inside a CSS file
+- type: filter
+  name: rocket_css_asset_target_path
+  since: 3.3.1
+  params:
+    target:
+      type: string
+      name: target
+      description: Target filepath.
+  summery: Filters the target path for an asset inside a CSS file
+  description: Filters the target path for an asset inside a CSS file
+- type: filter
+  name: rocket_css_content
+  since: "3.4"
+  params:
+    content:
+      type: string
+      name: content
+      description: CSS content.
+    source:
+      type: string
+      name: source
+      description: Source filepath.
+    target:
+      type: string
+      name: target
+      description: Target filepath.
+  summery: Filters the content of a CSS file
+  description: Filters the content of a CSS file
+- type: action
+  name: rocket_after_save_dynamic_lists
+  since: 3.12.1
+  summery: Fires after saving the dynamic lists file
+  description: Fires after saving the dynamic lists file
+- type: filter
+  name: rocket_minify_excluded_external_js
+  since: "2.2"
+  params:
+    pattern:
+      type: array
+      name: pattern
+      description: Patterns to match.
+  summery: Filters JS externals files to exclude from the combine process
+  description: Filters JS externals files to exclude from the combine process
+- type: filter
+  name: rocket_excluded_inline_js_content
+  since: "3.1"
+  params:
+    pattern:
+      type: array
+      name: pattern
+      description: Patterns to match.
+  summery: Filters inline JS excluded from being combined
+  description: Filters inline JS excluded from being combined
+- type: action
+  name: rocket_after_clean_used_css
+  since: "3.11"
+  summery: Fires after the used CSS has been cleaned in the database
+  description: Fires after the used CSS has been cleaned in the database
+- type: action
+  name: rocket_preload_lock_url
+  params:
+    url:
+      type: string
+      name: url
+      description: URL to lock
+  summery: Lock preload URL.
+  description: Lock preload URL.
+- type: action
+  name: rocket_rucss_after_clearing_usedcss
+  since: "3.11"
+  params:
+    url:
+      type: string
+      name: url
+      description: Current page URL.
+  summery: Fires after clearing usedcss for specific url.
+  description: Fires after clearing usedcss for specific url.
+- type: filter
+  name: rocket_usedcss_content
+  since: 3.9.0.2
+  params:
+    used_css:
+      type: string
+      name: used_css
+      description: Used CSS content.
+  summery: Filters Used CSS content before output.
+  description: Filters Used CSS content before output.
+- type: filter
+  name: rocket_font_url
+  since: 3.11.4
+  params:
+    url:
+      type: type
+      name: url
+      description: url to be rewritten.
+  summery: Filters font URL with CDN hostname
+  description: Filters font URL with CDN hostname
+- type: action
+  name: rocket_preload_activation
+  summery: Action that fires before the preload does.
+  description: Action that fires before the preload does.
+- type: filter
+  name: rocket_preload_sitemap_before_queue
+- type: filter
+  name: wp_sitemaps_enabled
+  see: WP_Sitemaps::register_rewrites()
+  since: 5.5.0
+  params:
+    is_enabled:
+      type: bool
+      name: is_enabled
+      description: Whether XML Sitemaps are enabled or not. Defaults
+  summery: Filters whether XML Sitemaps are enabled or not.
+  description: |-
+    Filters whether XML Sitemaps are enabled or not.
+    When XML Sitemaps are disabled via this filter, rewrite rules are still
+    in place to ensure a 404 is returned.
+    to true for public sites.
+- type: filter
+  name: rocket_preload_before_preload_url
+  params:
+    requests:
+      type: array
+      name: requests
+      description: Requests that will be done.
+  summery: Filters to modify requests done to preload an url.
+  description: Filters to modify requests done to preload an url.
+- type: filter
+  name: rocket_preload_url_request_args
+  params:
+    headers:
+      type: array
+      name: headers
+      description: Request arguments.
+  summery: Filters the arguments for the preload request.
+  description: Filters the arguments for the preload request.
+- type: filter
+  name: rocket_mobile_preload_user_agent_prefix
+  params:
+    prefix:
+      type: string
+      name: prefix
+      description: The prefix.
+  summery: Filter the prefix to prepend to the user agent used for preload to make
+    a HTTP request detected as a mobile device.
+  description: Filter the prefix to prepend to the user agent used for preload to
+    make a HTTP request detected as a mobile device.
+- type: filter
+  name: rocket_preload_fonts
+  since: "3.6"
+  params:
+    fonts:
+      type: array
+      name: fonts
+      description: Array of fonts paths.
+  summery: Filters the list of fonts to preload
+  description: Filters the list of fonts to preload
+- type: filter
+  name: rocket_preload_links_config
+  since: "3.7"
+  params:
+    config:
+      type: string[]
+      name: config
+      description: Preload Links script configuration parameters.
+  summery: Preload Links script configuration parameters.
+  description: |-
+    Preload Links script configuration parameters.
+    This array of parameters are passed as RocketPreloadLinksConfig object and used by the
+    `preload-links.min.js` script to configure the behavior of the Preload Links feature.
+- type: filter
+  name: rocket_preload_links_exclusions
+  since: 3.10.8
+  params:
+    excluded:
+      type: string[]
+      name: excluded
+      description: Array of excluded patterns.
+    default:
+      type: string[]
+      name: default
+      description: Array of default excluded patterns.
+  summery: Filters the patterns excluded from links preload
+  description: Filters the patterns excluded from links preload
+- type: action
+  name: rocket_preload_completed
+  params:
+    url:
+      type: string
+      name: url
+      description: URL preladed.
+    device:
+      type: string
+      name: device
+      description: Device from the cache.
+  summery: Fires when the preload from an URL is completed.
+  description: Fires when the preload from an URL is completed.
+- type: action
+  name: before_rocket_clean_minify
+  since: "2.1"
+  params:
+    ext:
+      type: string
+      name: ext
+      description: File extensions to minify.
+  summery: Fires before the minify cache files are deleted.
+  description: Fires before the minify cache files are deleted.
+- type: action
+  name: after_rocket_clean_minify
+  since: "2.1"
+  params:
+    ext:
+      type: string
+      name: ext
+      description: File extensions to minify.
+  summery: Fires after the minify cache files was deleted.
+  description: Fires after the minify cache files was deleted.
+- type: action
+  name: before_rocket_clean_busting
+  since: "2.9"
+  params:
+    ext:
+      type: string
+      name: ext
+      description: File extensions to clean.
+  summery: Fires before the cache busting files are deleted
+  description: Fires before the cache busting files are deleted
+- type: action
+  name: after_rocket_clean_cache_busting
+  since: "2.9"
+  params:
+    ext:
+      type: string
+      name: ext
+      description: File extensions to clean.
+  summery: Fires after the cache busting files was deleted
+  description: Fires after the cache busting files was deleted
+- type: action
+  name: before_rocket_clean_files
+  since: 3.2.2
+  params:
+    urls:
+      type: array
+      name: urls
+      description: The URLs corresponding to the deleted cache files.
+  summery: Fires before all cache files are deleted.
+  description: Fires before all cache files are deleted.
+- type: action
+  name: before_rocket_clean_file
+  since: "1.0"
+  params:
+    url:
+      type: string
+      name: url
+      description: The URL that the cache file to be deleted.
+  summery: Fires before the cache file is deleted.
+  description: Fires before the cache file is deleted.
+- type: action
+  name: after_rocket_clean_file
+  since: "1.0"
+  params:
+    url:
+      type: string
+      name: url
+      description: The URL that the cache file was deleted.
+  summery: Fires after the cache file is deleted.
+  description: Fires after the cache file is deleted.
+- type: action
+  name: after_rocket_clean_files
+  since: 3.2.2
+  params:
+    urls:
+      type: array
+      name: urls
+      description: The URLs corresponding to the deleted cache files.
+  summery: Fires after all cache files are deleted.
+  description: Fires after all cache files are deleted.
+- type: action
+  name: before_rocket_clean_home
+  since: "1.0"
+  params:
+    root:
+      type: string
+      name: root
+      description: The path of home cache file.
+    lang:
+      type: string
+      name: lang
+      description: The current lang to purge.
+  summery: Fires before the home cache file is deleted
+  description: Fires before the home cache file is deleted
+- type: action
+  name: after_rocket_clean_home
+  since: "1.0"
+  params:
+    root:
+      type: string
+      name: root
+      description: The path of home cache file.
+    lang:
+      type: string
+      name: lang
+      description: The current lang to purge.
+  summery: Fires after the home cache file was deleted
+  description: Fires after the home cache file was deleted
+- type: action
+  name: before_rocket_clean_home_feeds
+  since: "2.7"
+  params:
+    urls:
+      type: array
+      name: urls
+      description: The urls of the home feeds.
+  summery: Fires before the home feeds cache is deleted
+  description: Fires before the home feeds cache is deleted
+- type: action
+  name: after_rocket_clean_home_feeds
+  since: "2.7"
+  params:
+    urls:
+      type: array
+      name: urls
+      description: The urls of the home feeds.
+  summery: Fires after the home feeds cache was deleted
+  description: Fires after the home feeds cache was deleted
+- type: action
+  name: before_rocket_clean_domain
+  since: "1.0"
+  params:
+    root:
+      type: string
+      name: root
+      description: The path of home cache file.
+    lang:
+      type: string
+      name: lang
+      description: The current lang to purge.
+    url:
+      type: string
+      name: url
+      description: The home url.
+  summery: Fires before all cache files are deleted.
+  description: Fires before all cache files are deleted.
+- type: action
+  name: after_rocket_clean_domain
+  since: "1.0"
+  params:
+    root:
+      type: string
+      name: root
+      description: The path of home cache file.
+    lang:
+      type: string
+      name: lang
+      description: The current lang to purge.
+    url:
+      type: string
+      name: url
+      description: The home url.
+  summery: Fires after all cache files was deleted.
+  description: Fires after all cache files was deleted.
+- type: action
+  name: before_rocket_clean_term
+  since: 2.6.8
+  params:
+    term:
+      type: obj
+      name: term
+      description: The term object.
+    purge_urls:
+      type: array
+      name: purge_urls
+      description: URLs cache files to remove.
+    lang:
+      type: string
+      name: lang
+      description: The term language.
+  summery: Fires before deleted caching files related with the term
+  description: Fires before deleted caching files related with the term
+- type: action
+  name: after_rocket_clean_term
+  since: 2.6.8
+  params:
+    term:
+      type: obj
+      name: term
+      description: The term object.
+    purge_urls:
+      type: array
+      name: purge_urls
+      description: URLs cache files to remove.
+    lang:
+      type: string
+      name: lang
+      description: The term language.
+  summery: Fires before deleted caching files related with the term
+  description: Fires before deleted caching files related with the term
+- type: action
+  name: before_rocket_clean_user
+  since: 2.6.12
+  params:
+    user_id:
+      type: int
+      name: user_id
+      description: The path of home cache file.
+    lang:
+      type: string
+      name: lang
+      description: The language code.
+  summery: Fires before all caching files are deleted for a specific user
+  description: Fires before all caching files are deleted for a specific user
+- type: action
+  name: after_rocket_clean_user
+  since: 2.6.12
+  params:
+    user_id:
+      type: int
+      name: user_id
+      description: The path of home cache file.
+    lang:
+      type: string
+      name: lang
+      description: The language code.
+  summery: Fires after all caching files are deleted for a specific user
+  description: Fires after all caching files are deleted for a specific user
+- type: action
+  name: before_rocket_clean_cache_dir
+  since: 2.6.8
+  summery: Fires before deleting all caching files in the cache folder
+  description: Fires before deleting all caching files in the cache folder
+- type: action
+  name: after_rocket_clean_cache_dir
+  since: 2.6.8
+  summery: Fires after deleting all caching files in the cache folder
+  description: Fires after deleting all caching files in the cache folder
+- type: action
+  name: before_rocket_rrmdir
+  since: 1.1.0
+  params:
+    dir:
+      type: string
+      name: dir
+      description: File/Directory to delete.
+    dirs_to_preserve:
+      type: array
+      name: dirs_to_preserve
+      description: Directories that should not be deleted.
+  summery: Fires before a file/directory cache is deleted
+  description: Fires before a file/directory cache is deleted
+- type: action
+  name: after_rocket_rrmdir
+  since: 1.1.0
+  params:
+    dir:
+      type: string
+      name: dir
+      description: File/Directory to delete.
+    dirs_to_preserve:
+      type: array
+      name: dirs_to_preserve
+      description: Dirs that should not be deleted.
+  summery: Fires after a file/directory cache was deleted
+  description: Fires after a file/directory cache was deleted
+- type: filter
+  name: rocket_config_files_path
+  since: 2.6.5
+  params:
+    config_files_path:
+      type: array
+      name: config_files_path
+      description: Path of all config files.
+  summery: Filter all config files path
+  description: Filter all config files path
+- type: filter
+  name: rocket_config_file
+  since: "2.1"
+  params:
+    buffer:
+      type: string
+      name: buffer
+      description: The content that will be printed.
+    config_files_path:
+      type: array
+      name: config_files_path
+      description: Names of all config files.
+  summery: Filter the content of all config files
+  description: Filter the content of all config files
+- type: filter
+  name: rocket_clean_domain_urls
+  summery: This filter is documented in inc/functions/files.php */
+  description: This filter is documented in inc/functions/files.php */
+- type: filter
+  name: rocket_term_purge_urls
+  since: 2.6.8
+  params:
+    purge_urls:
+      type: array
+      name: purge_urls
+      description: List of URLs cache files to remove.
+    term:
+      type: obj
+      name: term
+      description: The term object.
+  summery: Filter URLs cache files to remove
+  description: Filter URLs cache files to remove
+- type: filter
+  name: rocket_url_no_dots
+  summery: This filter is documented in inc/front/htaccess.php */
+  description: This filter is documented in inc/front/htaccess.php */
+- type: filter
+  name: rocket_asset_url
+  since: 3.5.3
+  author:
+    0: Remy Perona
+    name: Remy Perona
+    1: Remy Perona
+  params:
+    url:
+      type: string
+      name: url
+      description: URL of the asset.
+    zones:
+      type: array
+      name: zones
+      description: CDN zones corresponding to the current assets type.
+  summery: Filters the URL before converting it to a path
+  description: Filters the URL before converting it to a path
+- type: filter
+  name: rocket_htaccess_marker
+  since: "2.1"
+  params:
+    marker:
+      type: string
+      name: marker
+      description: The content of all rules.
+  summery: Filter rules added by WP Rocket in .htaccess
+  description: Filter rules added by WP Rocket in .htaccess
+- type: filter
+  name: rocket_htaccess_mod_rewrite
+  since: "1.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rewrite rules to serve the cache file
+  description: Filter rewrite rules to serve the cache file
+- type: filter
+  name: rocket_htaccess_mobile_rewritecond
+  since: "2.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules for detect mobile version
+  description: Filter rules for detect mobile version
+- type: filter
+  name: rocket_htaccess_ssl_rewritecond
+  since: "2.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules for SSL requests
+  description: Filter rules for SSL requests
+- type: filter
+  name: rocket_webp_rewritecond
+  since: "3.4"
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules for webp.
+  description: Filter rules for webp.
+- type: filter
+  name: rocket_htaccess_mod_deflate
+  since: "1.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules to improve performances with GZIP Compression
+  description: Filter rules to improve performances with GZIP Compression
+- type: filter
+  name: rocket_htaccess_mod_expires
+  since: "1.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules to improve performances with Expires Headers
+  description: Filter rules to improve performances with Expires Headers
+- type: filter
+  name: rocket_htaccess_charset
+  since: "1.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules for default charset on static files
+  description: Filter rules for default charset on static files
+- type: filter
+  name: rocket_htaccess_files_match
+  since: 1.1.6
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules for cache control
+  description: Filter rules for cache control
+- type: filter
+  name: rocket_htaccess_etag
+  since: "1.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules to remove the etag
+  description: Filter rules to remove the etag
+- type: filter
+  name: rocket_htaccess_web_fonts_access
+  since: "1.0"
+  params:
+    rules:
+      type: string
+      name: rules
+      description: Rules that will be printed.
+  summery: Filter rules to Cross-origin fonts sharing
+  description: Filter rules to Cross-origin fonts sharing
+- type: filter
+  name: rocket_has_wp_htaccess_rules
+  since: 3.2.4
+  author:
+    0: "Gr\xE9gory Viguier"
+    name: "Gr\xE9gory Viguier"
+    1: "Gr\xE9gory Viguier"
+  params:
+    has_wp_rules:
+      type: bool
+      name: has_wp_rules
+      description: True when present. False otherwise.
+    content:
+      type: string
+      name: content
+      description: .htaccess content.
+  summery: Tell if WP rewrite rules are present in a given string.
+  description: Tell if WP rewrite rules are present in a given string.
+- type: filter
+  name: rocket_langs_to_preserve
+  since: "2.1"
+  params:
+    langs_to_preserve:
+      type: array
+      name: langs_to_preserve
+      description: List of directories path to preserve.
+  summery: Filter directories path to preserve of cache purge.
+  description: Filter directories path to preserve of cache purge.
+- type: filter
+  name: rocket_dns_prefetch
+  since: 1.1.0
+  params:
+    domains:
+      type: array
+      name: domains
+      description: List of domains to prefetch DNS
+  summery: Filter list of domains to prefetch DNS
+  description: Filter list of domains to prefetch DNS
+- type: filter
+  name: rocket_cache_reject_uri
+  since: "2.1"
+  params:
+    uris:
+      type: array
+      name: uris
+      description: List of rejected uri
+    show_safe_content:
+      type: bool
+      name: show_safe_content
+      description: show sensitive uris.
+  summery: Filter the rejected uri
+  description: Filter the rejected uri
+- type: filter
+  name: rocket_cache_reject_cookies
+  since: "2.1"
+  params:
+    cookies:
+      type: array
+      name: cookies
+      description: List of rejected cookies.
+  summery: Filter the rejected cookies.
+  description: Filter the rejected cookies.
+- type: filter
+  name: rocket_cache_mandatory_cookies
+  since: "2.7"
+  params:
+    cookies:
+      type: array
+      name: cookies
+      description: List of mandatory cookies.
+  summery: Filter list of mandatory cookies.
+  description: Filter list of mandatory cookies.
+- type: filter
+  name: rocket_cache_dynamic_cookies
+  since: "2.7"
+  params:
+    cookies:
+      type: array
+      name: cookies
+      description: List of dynamic cookies.
+  summery: Filter list of dynamic cookies.
+  description: Filter list of dynamic cookies.
+- type: filter
+  name: rocket_cache_reject_ua
+  since: 2.3.5
+  params:
+    ua:
+      type: array
+      name: ua
+      description: List of rejected User-Agent.
+  summery: Filter the rejected User-Agent
+  description: Filter the rejected User-Agent
+- type: filter
+  name: rocket_cache_query_strings
+  since: "2.3"
+  params:
+    query_strings:
+      type: array
+      name: query_strings
+      description: List of query strings which can be cached.
+  summery: Filter query strings which can be cached.
+  description: Filter query strings which can be cached.
+- type: filter
+  name: editable_slug
+  summery: This filter is documented in wp-admin/edit-tag-form.php */
+  description: This filter is documented in wp-admin/edit-tag-form.php */
+- type: action
+  name: wp_rocket_loaded
+  since: "1.0"
+  summery: Fires when WP Rocket is correctly loaded
+  description: Fires when WP Rocket is correctly loaded
+- type: filter
+  name: rocket_wc_product_gallery_delay_js_exclusions
+  since: 3.10.2
+  params:
+    exclusions_gallery:
+      type: array
+      name: exclusions_gallery
+      description: Array of excluded filepaths.
+  summery: Filters the JS files excluded from delay JS when WC product gallery has
+    images.
+  description: Filters the JS files excluded from delay JS when WC product gallery
+    has images.
+...
