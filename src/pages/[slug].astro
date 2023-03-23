@@ -1,4 +1,6 @@
 ---
+import _ from 'lodash';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import getHooks from "../lib/hooks";
 export async function getStaticPaths() {
     const hooks = await getHooks();
@@ -13,21 +15,55 @@ export async function getStaticPaths() {
             summery: hook.summery,
             description: hook.description,
             author: hook.author,
+            files: hook.files,
+            repository: hooks.repository,
+            commit: hooks.commit,
         },
     }));
 }
 
-const { title, type, description = '' } = Astro.props;
+const { title, type, since = '', description = '', summery = '', params = null, files = [], repository = '', commit = '' } = Astro.props;
+
+const filesWithUrl = files.map(file => {
+                        file.url = `${repository}/blob/${commit}/${file.path}#L${file.line}`;
+                        return file;
+                        });
 ---
-<html lang="en">
-<head>
-    <title>{title}</title>
-</head>
-<body>
-<h1>{title}</h1>
-<p>{type}</p>
-{description !== '' &&
-        <p>{description}</p>
-}
-</body>
-</html>
+<BaseLayout title={title} description={summery}>
+<div class="hook">
+    <p class="type">Type: <span>{type}</span></p>
+    {since !== '' &&
+            <p class="since">Since: {since}</p>
+    }
+    <div>
+    {params && <div class="parameters">
+        <h3>Parameters</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        {_.map(params, (value, key) => (<tr>
+                        <td>{key}</td>
+                        <td>{value.type}</td>
+                        <td>{value.description}</td>
+                    </tr>))}
+        </table>
+    </div>
+    }
+
+    {filesWithUrl.length > 0 && <div class="usages">
+        <h3>Usages</h3>
+        <ul>
+            {filesWithUrl.map(file => <li><a href={file.url}>{file.path}#{file.line}</a></li>)}
+        </ul>
+    </div>}
+    {description !== '' &&
+            <div class="description">
+                <h3>Description</h3>
+                <p>{description}</p>
+            </div>
+    }
+</div>
+</BaseLayout>

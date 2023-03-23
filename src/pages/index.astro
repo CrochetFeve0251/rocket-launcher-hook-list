@@ -2,36 +2,16 @@
 import getHooks from "../lib/hooks";
 // Component Imports
 import SearchList, {Hook} from "../components/SearchList";
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 const hooks = await getHooks();
 const names = hooks.hooks.map(hook => {return {
 	    name: hook.name,
-		type: hook.type
+		type: hook.type,
+		summery: hook.summery,
 } as Hook;});
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+const title = hooks.title;
+const description = hooks.description;
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
-	</head>
-	<body>
-		<main>
-			<SearchList list={names} client:visible/>
-		</main>
-	</body>
-</html>
+<BaseLayout title={title} description={description}>
+    <SearchList list={names} client:visible/>
+</BaseLayout>

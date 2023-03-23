@@ -1,3 +1,5 @@
+.idea
+
 # build output
 dist/
 # generated types
@@ -19,3 +21,5 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+hooks-output.yml

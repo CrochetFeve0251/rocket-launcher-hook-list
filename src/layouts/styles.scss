@@ -1,0 +1,119 @@
+@import "../../variables";
+
+html {
+    background-color: $background_color;
+    font-size: $base;
+    color: $font-color;
+}
+
+a {
+    color: $primary;
+    text-decoration: none;
+}
+
+header {
+    h1 {
+        font-size: 3 * $base;
+    }
+    h1, p {
+        text-align: center;
+    }
+}
+
+nav {
+    max-width: $container;
+    margin: auto;
+    a {
+        color: $secondary;
+        font-size: 1.5 * $base;
+    }
+}
+
+footer {
+    p {
+        text-align: center;
+    }
+}
+
+article {
+    max-width: $container;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.search-list {
+    display: flex;
+    flex-direction: column;
+    input {
+        max-width: 100%;
+        min-width: 250px;
+        margin: $space 0;
+        padding: 0.5 * $space $space;
+        font-size: 1.5 * $base;
+    }
+    table {
+        border-spacing:0;
+        border-collapse: collapse;
+        tr:first-child {
+            background-color: $secondary;
+            color: $table_title_color;
+            font-size: 2 * $base;
+            th {
+                padding: $space 2 * $space;
+                border: none;
+            }
+        }
+        tr {
+            border-bottom: 1px #ccc;
+            td {
+                padding: 0.25 * $space 0.5 * $space;
+                &:first-child {
+                    font-size: 1.1 * $base;
+                }
+                &:nth-child(2) {
+                    font-size: 1.1 * $base;
+                    text-align: center;
+                    font-weight: bolder;
+                }
+                border: none;
+                border-bottom: 1px solid $border_table;
+            }
+        }
+    }
+}
+
+.parameters {
+    table {
+        border-spacing:0;
+        border-collapse: collapse;
+        tr:first-child {
+            background-color: $secondary;
+            color: $table_title_color;
+            font-size: 1.25 * $base;
+            text-align: center;
+            th {
+                padding: 0.5 * $space $space;
+            }
+        }
+        tr {
+            td:first-child, td:nth-child(2) {
+                text-align: center;
+                font-size: 1.1 * $base;
+            }
+            td {
+                padding: 0.15 * $space 0.3 * $space;
+                border-bottom: 1px solid $border_table;
+            }
+        }
+    }
+}
+
+.type, .since {
+    font-size: 1.2 * $base;
+    span {
+        font-weight: bolder;
+    }
+}
