@@ -1,10 +1,13 @@
 ---
 import getHooks from "../lib/hooks";
 // Component Imports
-import SearchList from "../components/SearchList";
+import SearchList, {Hook} from "../components/SearchList";
 
 const hooks = await getHooks();
-const names = hooks.hooks.map(hook => hook.name);
+const names = hooks.hooks.map(hook => {return {
+	    name: hook.name,
+		type: hook.type
+} as Hook;});
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---

@@ -8,11 +8,16 @@ export async function getStaticPaths() {
         props: {
             title: hook.name,
             type: hook.type,
+            since: hook.since,
+            params: hook.params,
+            summery: hook.summery,
+            description: hook.description,
+            author: hook.author,
         },
     }));
 }
 
-const { title, type } = Astro.props;
+const { title, type, description = '' } = Astro.props;
 ---
 <html lang="en">
 <head>
@@ -21,5 +26,8 @@ const { title, type } = Astro.props;
 <body>
 <h1>{title}</h1>
 <p>{type}</p>
+{description !== '' &&
+        <p>{description}</p>
+}
 </body>
 </html>
